@@ -50,16 +50,39 @@ router.get("/api/wx_openid", async (ctx) => {
   }
 });
 
+
+const configuration = new Configuration({
+  apiKey: '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'
+});
+
+const openai = new OpenAIApi(configuration);
+
+async function getAIResponse(prompt){
+  const completion = await openai.createCompletion({
+       model: 'gpt-3.5-turbo',
+       prompt,
+       max_tokens:1024,
+       temperature:0.6,
+  });
+  return (completion?.data?.choices?.[0].text || 'AI 挂啦!').trim();
+}
+
+
 router.post('/message/post', async ctx =>{
  const {ToUserName,FromUserName,Content,CreateTime} = ctx.request.body;
+
+ const response = await getAIResponse(Content);
+
  ctx.body = {
   ToUserName: FromUserName,
   FromUserName: ToUserName,
   CreateTime: new Date(),
   MsgType: 'text',
-  Content: `反弹你的消息:${Content}`,
+  Content:  response,
  };
 });
+
+
 
 const app = new Koa();
 app
