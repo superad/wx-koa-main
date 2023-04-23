@@ -57,7 +57,7 @@ router.post('/message/post', async ctx =>{
   FromUserName: ToUserName,
   CreateTime: new Date(),
   MsgType: 'text',
-  Content: `反弹你的消息:${content}`,
+  Content: `反弹你的消息:${Content}`,
  };
 });
 
