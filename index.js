@@ -50,7 +50,8 @@ router.get("/api/wx_openid", async (ctx) => {
   }
 });
 
-const {ToUserName,FromUserName,Content,CreateTime} = ctx.request.body;
+router.post('/message/post', async ctx =>{
+ const {ToUserName,FromUserName,Content,CreateTime} = ctx.request.body;
  ctx.body = {
   ToUserName: FromUserName,
   FromUserName: ToUserName,
