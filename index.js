@@ -54,7 +54,8 @@ router.get("/api/wx_openid", async (ctx) => {
 
 
 const configuration = new Configuration({
-  apiKey: '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'
+   basePath: "http://fgm0129.top", 
+   apiKey: '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'
 });
 
 const openai = new OpenAIApi(configuration);
